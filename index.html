@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./styles.css">
+<script src="https://cdn.webix.com/edge/webix.js" type="text/javascript" charset="utf-8"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Interface</title>
+
+</head>
+<body style="background: blueviolet">
+        <script type="text/javascript" charset="utf-8">
+            var oportunitiesList = [
+                {id: 1, title:"Opportunity: A New Hope", bank:"BankOfAmerica", stage:"grief",
+                    logs:"Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Cluster created with settings {hosts=[172.18.100.2:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}\n" +
+                        "Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: No server chosen by com.mongodb.async.client.ClientSessionHelper$1@6e01f9b0 from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=172.18.100.2:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:1, serverValue:589}] to 172.18.100.2:27017\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Monitor thread successfully connected to server with description ServerDescription{address=172.18.100.2:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 5]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3981899}\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:2, serverValue:590}] to 172.18.100.2:27017\n" +
+                        "can't add CSV1\\BankOfAmerica\\April because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1522530000000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\June because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1527800400000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\May (1) because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1525122000000) }\n" +
+                        "SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\".\n" +
+                        "SLF4J: Defaulting to no-operation (NOP) logger implementation\n" +
+                        "SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n" +
+                        "Assigning AVOCADO FRESH HARVEST, LLC\n" +
+                        "Pending opportunities: \n" +
+                        "0. Arise Consulting Enterprise LLC\n" +
+                        "1. First Team Security Inc\n" +
+                        "2. DANNA R BODENHEIMER DBA WALNUT PSYCHOTHERAPY CENTER\n" +
+                        "Type opportunity number: ^C"},
+                {id: 2, title:"Opportunity: The Empire Strikes Back", bank:"BankOfAmerica", stage:"anger",
+                    logs:"Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Cluster created with settings {hosts=[172.18.100.2:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}\n" +
+                        "Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: No server chosen by com.mongodb.async.client.ClientSessionHelper$1@6e01f9b0 from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=172.18.100.2:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:1, serverValue:589}] to 172.18.100.2:27017\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Monitor thread successfully connected to server with description ServerDescription{address=172.18.100.2:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 5]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3981899}\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:2, serverValue:590}] to 172.18.100.2:27017\n" +
+                        "can't add CSV1\\BankOfAmerica\\April because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1522530000000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\June because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1527800400000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\May (1) because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1525122000000) }\n" +
+                        "SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\".\n" +
+                        "SLF4J: Defaulting to no-operation (NOP) logger implementation\n" +
+                        "SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n" +
+                        "Assigning AVOCADO FRESH HARVEST, LLC\n" +
+                        "Pending opportunities: \n" +
+                        "0. Arise Consulting Enterprise LLC\n" +
+                        "1. First Team Security Inc\n" +
+                        "2. DANNA R BODENHEIMER DBA WALNUT PSYCHOTHERAPY CENTER\n" +
+                        "Type opportunity number: ^C"},
+                {id: 3, title:"Opportunity: Return of The Jedi", bank:"BankOfAmerica", stage:"meowing",
+                    logs:"Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Cluster created with settings {hosts=[172.18.100.2:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}\n" +
+                        "Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: No server chosen by com.mongodb.async.client.ClientSessionHelper$1@6e01f9b0 from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=172.18.100.2:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:1, serverValue:589}] to 172.18.100.2:27017\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Monitor thread successfully connected to server with description ServerDescription{address=172.18.100.2:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 5]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3981899}\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:2, serverValue:590}] to 172.18.100.2:27017\n" +
+                        "can't add CSV1\\BankOfAmerica\\April because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1522530000000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\June because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1527800400000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\May (1) because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1525122000000) }\n" +
+                        "SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\".\n" +
+                        "SLF4J: Defaulting to no-operation (NOP) logger implementation\n" +
+                        "SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n" +
+                        "Assigning AVOCADO FRESH HARVEST, LLC\n" +
+                        "Pending opportunities: \n" +
+                        "0. Arise Consulting Enterprise LLC\n" +
+                        "1. First Team Security Inc\n" +
+                        "2. DANNA R BODENHEIMER DBA WALNUT PSYCHOTHERAPY CENTER\n" +
+                        "Type opportunity number: ^C"},
+                {id: 4, title:"Opportunity: The Force Awakens", bank:"BankOfAmerica", stage:"refusal",
+                    logs:"Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Cluster created with settings {hosts=[172.18.100.2:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}\n" +
+                        "Jul 24, 2018 5:03:19 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: No server chosen by com.mongodb.async.client.ClientSessionHelper$1@6e01f9b0 from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, serverDescriptions=[ServerDescription{address=172.18.100.2:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:1, serverValue:589}] to 172.18.100.2:27017\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Monitor thread successfully connected to server with description ServerDescription{address=172.18.100.2:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 5]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3981899}\n" +
+                        "Jul 24, 2018 5:03:20 PM com.mongodb.diagnostics.logging.JULLogger log\n" +
+                        "INFO: Opened connection [connectionId{localValue:2, serverValue:590}] to 172.18.100.2:27017\n" +
+                        "can't add CSV1\\BankOfAmerica\\April because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1522530000000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\June because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1527800400000) }\n" +
+                        "can't add CSV1\\BankOfAmerica\\May (1) because of com.mongodb.MongoWriteException: E11000 duplicate key error collection: docs-repo.documents index: bankName_1_accNums_1_periodFrom_1 dup key: { : \"BankOfAmerica\", : \"586038114343\", : new Date(1525122000000) }\n" +
+                        "SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\".\n" +
+                        "SLF4J: Defaulting to no-operation (NOP) logger implementation\n" +
+                        "SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.\n" +
+                        "Assigning AVOCADO FRESH HARVEST, LLC\n" +
+                        "Pending opportunities: \n" +
+                        "0. Arise Consulting Enterprise LLC\n" +
+                        "1. First Team Security Inc\n" +
+                        "2. DANNA R BODENHEIMER DBA WALNUT PSYCHOTHERAPY CENTER\n" +
+                        "Type opportunity number: ^C"},
+                {id: 5, title:"Opportunity: The Last Jedi", bank:"BankOfAmerica", stage:"acceptance",logs:""}
+            ]
+            var stagesList = [
+                {id: 1, title: "Stage One"},
+                {id: 2, title: "Stage Two"},
+                {id: 3, title: "Stage Three"},
+                {id: 4, title: "Stage Four"},
+                {id: 5, title: "Stage Five"}
+            ]+
+            webix.ui({
+                id:"ui",
+                type:"wide",
+                padding: 15,
+                css: "ui",
+                cols: [
+                    {
+                        rows:[
+                            {  template:"Opportunities", height: 30,css:"lable"},
+                            {   view:"list",
+                                id:"Opportunities",
+                                dynamic: true,
+                                template:"#id# - #opportunityName#",
+                                select:true,
+                                drag: true
+                                },
+                            { view:"toolbar",css:"buttonHolder", elements:[
+                                    {css:"bt_1",view:"button",id:"import", value:"Import", height:30 },
+                                    {css:"bt_1",view:"button",id:"delete", value:"Delete", height:30 }
+                                ]
+                            }]
+                    },
+                    {type: "wide",
+                        rows:[
+                            { template:"Stages" ,height: 30,css:"lable"},
+                            {
+                                view:"textarea",
+                                id:"Stages",
+                                value:"",
+                                height:60
+                            }
+
+                            ]
+                    },
+                    {type: "wide",
+                        rows: [
+                            {rows:[
+                                    {template:"Log",height:30,css:"lable"},
+                                    {view:"textarea",
+                                        id:"Log",
+                                        value:""
+                                    }
+                                ]
+                            },
+                            {
+                                id:"CurrentAdvances",
+                                hidden: true,
+                                animate:{type:"slide",subtype:"in"},
+                                rows:[
+                                    {template:"Current Advances",height:30},
+                                    {view:"form",
+                                        elements:[
+                                            {
+                                                view:"text",
+                                                value:"I am a text and i have a meaning"
+                                            },
+                                            {
+                                                view:"label",
+                                                label:"The part that you chose from string"
+                                            },
+                                            {
+                                                view:"richselect",
+                                                placeholder: "Type of keyword",
+                                                options:
+                                                    [
+                                                        "There are",
+                                                        "Many keywords",
+                                                        "And you",
+                                                        "Are choosing",
+                                                        "From them"
+                                                    ]
+                                            },
+                                            {
+                                                view:"button",
+                                                label:"Assign keyword"
+                                            }
+                                        ]
+                                     }
+                                ]},
+                            { view:"toolbar",css:"buttonHolder", elements:[
+                                    {view:"button",css:"bt_1",id:"buttonAdvances", value:"Current Advances", height:30 },
+                                    {view:"button",css:"bt_1",id:"export", value:"Export", height:30 },
+                                    {view:"button",css:"bt_1",id:"SalesForce", value:"SF", height:30 }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            $$("Opportunities").load("http://localhost:63343/Interface/data_test.json");
+        $$("Opportunities").attachEvent("onItemClick", function(id){
+        var stage = this.getItem(id).stage;
+        var logs = this.getItem(id).logs;
+        $$("Stages").setValue(stage);
+        $$("Log").setValue(logs);
+        webix.message("All done");
+        return true;
+        });
+        $$("buttonAdvances").attachEvent("onItemClick", function(){
+            if($$("CurrentAdvances").isVisible()) {
+                $$("CurrentAdvances").hide();
+            }
+            else{$$("CurrentAdvances").show()}
+        return true;
+        });
+        </script>
+</body>
+</html>
