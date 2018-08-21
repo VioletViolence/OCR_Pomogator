@@ -1,121 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-
-<link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css" charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./styles.css">
-<script src="https://cdn.webix.com/edge/webix.js" type="text/javascript" charset="utf-8"></script>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Interface</title>
+    <title>Title</title>
+
+
+    <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
+    <link rel="stylesheet" href="button.css" type="text/css">
+    <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+
+
 </head>
-<body style="background: blueviolet">
-        <script type="text/javascript" charset="utf-8">
-            webix.ui({
-                id:"ui",
-                type:"wide",
-                padding: 15,
-                css: "ui",
-                cols: [
-                    {
-                        rows:[
-                            {  template:"Opportunities", height: 30,css:"lable"},
-                            {   view:"list",
-                                id:"Opportunities",
-                                dynamic: true,
-                                template:"#id# - #opportunityName#",
-                                select:true,
-                                drag: true
-                                },
-                            { view:"toolbar",css:"buttonHolder", elements:[
-                                    {css:"bt_1",view:"button",id:"import", value:"Import", height:30 },
-                                    {css:"bt_1",view:"button",id:"delete", value:"Delete", height:30 }
-                                ]
-                            }]
-                    },
-                    {type: "wide",
-                        rows:[
-                            { template:"Stages" ,height: 30,css:"lable"},
-                            {
-                                view:"textarea",
-                                id:"Stages",
-                                value:"",
-                                height:60
-                            }
+<body>
+<!--<a href="#" class="button button-circle">Silver Circle</a>-->
+<!--<a href="#" class="button button-circle button-primary">Blue Circle</a>-->
+<!--<a href="#" class="button button-circle button-action">Green Circle</a>-->
+<!--<a href="#" class="button button-circle button-highlight">Orange Circle</a>-->
+<!--<a href="#" class="button button-circle button-caution">Red Circle</a>-->
+<!--<a href="#" class="button button-circle button-royal">Purple Circle</a>-->
 
-                            ]
-                    },
-                    {type: "wide",
-                        rows: [
-                            {rows:[
-                                    {template:"Log",height:30,css:"lable"},
-                                    {view:"textarea",
-                                        id:"Log",
-                                        value:""
-                                    }
-                                ]
-                            },
-                            {
-                                id:"CurrentAdvances",
-                                hidden: true,
-                                animate:{type:"slide",subtype:"in"},
-                                rows:[
-                                    {template:"Current Advances",height:30},
-                                    {view:"form",
-                                        elements:[
-                                            {
-                                                view:"text",
-                                                value:"I am a text and i have a meaning"
-                                            },
-                                            {
-                                                view:"label",
-                                                label:"The part that you chose from string"
-                                            },
-                                            {
-                                                view:"richselect",
-                                                placeholder: "Type of keyword",
-                                                options:
-                                                    [
-                                                        "There are",
-                                                        "Many keywords",
-                                                        "And you",
-                                                        "Are choosing",
-                                                        "From them"
-                                                    ]
-                                            },
-                                            {
-                                                view:"button",
-                                                label:"Assign keyword"
-                                            }
-                                        ]
-                                     }
-                                ]},
-                            { view:"toolbar",css:"buttonHolder", elements:[
-                                    {view:"button",css:"bt_1",id:"buttonAdvances", value:"Current Advances", height:30 },
-                                    {view:"button",css:"bt_1",id:"export", value:"Export", height:30 },
-                                    {view:"button",css:"bt_1",id:"SalesForce", value:"SF", height:30 }
-                                ]
-                            }
-                        ]
+<div id="container"></div>
+
+<script>
+
+    var form1 = [
+        {type: "header", template: "OCR Helper"},
+        {
+            margin: 5, cols: [
+                {
+                view: "datatable",
+                //  border: true,
+                scroll: false,
+                id: "dtable",
+                css: "my-dtable",
+                dynamic: true,
+                on: {
+                    'onItemClick': function (id) {
+                            $$("log").setValue(id.column+" row "+id.row)
+                        if($$("CurrentAdvances").isVisible()) {
+                            $$("CurrentAdvances").hide();
+                        }
+                        else{$$("CurrentAdvances").show()}
                     }
-                ]
-            });
+                },
+                columns: [
+                    {id: "rank", header: "", width: 30},
+                    {id: "oppName", header: "Opportunity Name", fillspace:true},
+                    {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){
+                        if(obj.Downloaded === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                        if(obj.Downloaded === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                        if(obj.Downloaded === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                    }},
+                    {id: "Attached", header: "Attached", adjust:"header",template: function(obj){
+                            if(obj.Attached === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.Attached === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.Attached === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                    {id: "Validated", header: "Validated",adjust:"header",template: function(obj){
+                            if(obj.Validated === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.Validated === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.Validated === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                    {id: "Advances", header: "Advances",adjust:"header",template: function(obj){
+                            if(obj.Advances === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.Advances === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.Advances === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                    {id: "CVC", header: "CVC",adjust:"header",template: function(obj){
+                            if(obj.CVC === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.CVC === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.CVC === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                    {id: "Submission", header: "Submission",adjust:"header",template: function(obj){
+                            if(obj.Submission === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.Submission === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.Submission === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                    {id: "Completed", header: "Completed",adjust:"header",template: function(obj){
+                            if(obj.Completed === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                            if(obj.Completed === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                            if(obj.Completed === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }}
 
-            $$("Opportunities").load("http://localhost:63343/Interface/data_test.json");
-        $$("Opportunities").attachEvent("onItemClick", function(id){
-        var stage = this.getItem(id).stage;
-        var logs = this.getItem(id).logs;
-        $$("Stages").setValue(stage);
-        $$("Log").setValue(logs);
-        webix.message("All done");
-        return true;
-        });
-        $$("buttonAdvances").attachEvent("onItemClick", function(){
-            if($$("CurrentAdvances").isVisible()) {
-                $$("CurrentAdvances").hide();
-            }
-            else{$$("CurrentAdvances").show()}
-        return true;
-        });
-        </script>
+                ],
+                data: [
+                    {
+                        id: 1,
+                        oppName: "The Shawshank Redemption 2323 43434 5335 ",
+                        votes: 678790,
+                        stages: "<input type='button' value='Downloaded' />",
+                        Downloaded: "Complete",
+                        Attached: "Complete",
+                        Validated: "Failed",
+                        Advances: "Complete",
+                        CVC: "Complete",
+                        Submission: "Complete",
+                        Completed: "Complete",
+                        rank: 1
+                    },
+                    {   id: 2,
+                        oppName: "The Shawshank Redemption 2323 43434 5335 ",
+                        votes: 678790,
+                        stages: "<input type='button' value='Downloaded' />",
+                        Downloaded: "Failed",
+                        Attached: "Failed",
+                        Validated: "In Process",
+                        Advances: "Complete",
+                        CVC: "Complete",
+                        Submission: "Failed",
+                        Completed: "Complete",
+                        rank: 2}
+                ]
+            },
+                { view:"resizer" },
+                {
+                    id:"log",view: "text", type: "form", value: "Here is log", width: 350, height: 500
+                }
+                ],
+        },
+        {view: "button", name: "submit", value: "Export Opportunity"}
+    ];
+    webix.ui({
+        view: "form",
+        id: "my_form",
+        elements: form1
+    });
+</script>
+
 </body>
 </html>
