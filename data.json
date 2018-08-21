@@ -1,0 +1,25 @@
+{
+  "opportunities": [{
+    "id": "00Bf4000007vspO",
+    "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
+    "stages": [
+      {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
+      {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": []},
+      {"name": "Integrity validated", "status": "Error", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
+      {"name": "Current advances checked", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": []},
+      {"name": "CBC pulled", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": []},
+      {"name": "Submission validated", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": []},
+      {"name": "Completed", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": []},
+    ]
+
+  }],
+  "stages": ["Downloaded",
+    "Files attached",
+    "Integrity validated",
+    "Current advances checked",
+    "CBC pulled",
+    "Submission validated",
+    "Completed"],
+
+  "stageStatuses": ["In process", "Completed", "Error"]
+}
