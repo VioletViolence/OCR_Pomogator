@@ -18,6 +18,12 @@
 <div id="container"></div>
 
 <script>
+    function buttonCheck (obj, column){
+        var Stage = obj.stages.find(function(item) {return item.name === column});
+        if(Stage && Stage.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+        if(Stage && Stage.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+        if(Stage && Stage.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+    }
     function standartLog(stage) {
         switch (stage.status) {
             case "Completed":
@@ -79,48 +85,13 @@
                         columns: [
                             {id: "id", header: "id", width: 30},
                             {id: "opportunityName", header: "Opportunity Name", fillspace: true},
-                            {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){
-                            var Downloaded = obj.stages.find(function(item) {return item.name === "Downloaded"});
-                                if(Downloaded && Downloaded.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Downloaded && Downloaded.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Downloaded && Downloaded.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                            {id: "Files attached", header: "Attached", adjust:"header",template: function(obj){
-                                var Attached = obj.stages.find(function(item) {return item.name === "Files attached"});
-                                if(Attached && Attached.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Attached && Attached.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Attached && Attached.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }},
-                            {id: "Integrity validated", header: "Validated",adjust:"header",template: function(obj){
-                                var Validated = obj.stages.find(function(item) {return item.name === "Integrity validated"});
-                                if(Validated && Validated.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Validated && Validated.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Validated && Validated.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }},
-                            {id: "Current advances checked", header: "Advances",adjust:"header",template: function(obj){
-                                var Advances = obj.stages.find(function(item) {return item.name === "Current advances checked"});
-                                if(Advances && Advances.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Advances && Advances.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Advances && Advances.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }},
-                            {id: "CBC pulled", header: "CBC",adjust:"header",template: function(obj){
-                                var CBC = obj.stages.find(function(item) {return item.name === "CBC pulled"});
-                                if(CBC && CBC.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(CBC && CBC.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(CBC && CBC.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }},
-                            {id: "Submission validated", header: "Submission",adjust:"header",template: function(obj){
-                                var Submission = obj.stages.find(function(item) {return item.name === "Submission validated"});
-                                if(Submission && Submission.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Submission && Submission.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Submission && Submission.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }},
-                            {id: "Completed", header: "Completed",adjust:"header",template: function(obj){
-                                var Completed = obj.stages.find(function(item) {return item.name === "Completed"});
-                                if(Completed && Completed.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                                if(Completed && Completed.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                                if(Completed && Completed.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                            }}
+                            {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Files attached", header: "Attached", adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Integrity validated", header: "Validated",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Current advances checked", header: "Advances",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "CBC pulled", header: "CBC",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Submission validated", header: "Submission",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Completed", header: "Completed",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}}
                         ]},
                         {
                             id:"Current Advances",
