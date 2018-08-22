@@ -85,13 +85,13 @@
                         columns: [
                             {id: "id", header: "id", width: 30},
                             {id: "opportunityName", header: "Opportunity Name", fillspace: true},
-                            {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "Files attached", header: "Attached", adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "Integrity validated", header: "Validated",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "Current advances checked", header: "Advances",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "CBC pulled", header: "CBC",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "Submission validated", header: "Submission",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
-                            {id: "Completed", header: "Completed",adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}}
+                            {id: "Downloaded", header: "Downloaded",css:{'text-align':'center'},adjust:"header", template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Files attached", header: "Attached",css:{'text-align':'center'}, adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Integrity validated", header: "Validated",css:{'text-align':'center'},adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Current advances checked", header: "Advances",css:{'text-align':'center'},adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "CBC pulled", header: "CBC",adjust:"header",css:{'text-align':'center'},template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Submission validated", header: "Submission",css:{'text-align':'center'},adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}},
+                            {id: "Completed", header: "Completed",css:{'text-align':'center'},adjust:"header",template: function(obj){return buttonCheck(obj,this.id)}}
                         ]},
                         {
                             id:"Current Advances",
