@@ -145,9 +145,23 @@
                                 },
                                 {rows:[
                                         {
-                                            id: "AdvanceEditor",
-                                            view: "textarea",
-                                            placeholder: "Write down new MCI"
+                                            cols:[
+                                                {
+                                                    id: "AdvanceEditor",
+                                                    view: "textarea",
+                                                    placeholder: "Write down new MCI"
+                                                },
+                                                {
+                                                    id:"dropDown",
+                                                    view:"select",
+                                                    options:[
+                                                        "Placeholder #1",
+                                                        "Placeholder #2",
+                                                        "Placeholder #3"
+                                                    ],
+                                                    width: 120
+                                                }
+                                                ]
                                         },
                                         {
                                             id: "MCI button",
