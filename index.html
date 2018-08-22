@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-
     <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
     <link rel="stylesheet" href="button.css" type="text/css">
     <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
-
-
 </head>
 <body>
 <!--<a href="#" class="button button-circle">Silver Circle</a>-->
@@ -22,110 +18,188 @@
 <div id="container"></div>
 
 <script>
-
+    function standartLog(stage) {
+        switch (stage.status) {
+            case "Completed":
+                $$("log").setValue(stage.log);
+                break;
+            case "Error":
+                $$("log").setValue(stage.log + "\n" + "\n" + "\n" + "Errors:\n" + stage.errors);
+                break;
+            case "In Process":
+                $$("log").setValue(stage.log);
+        }
+    }
     var form1 = [
         {type: "header", template: "OCR Helper"},
         {
             margin: 5, cols: [
                 {
-                view: "datatable",
-                //  border: true,
-                scroll: false,
-                id: "dtable",
-                css: "my-dtable",
-                dynamic: true,
-                on: {
-                    'onItemClick': function (id) {
-                            $$("log").setValue(id.column+" row "+id.row)
-                        if($$("Curr0ntAdvances").isVisible()) {
-                            $$("CurrentAdvances").hide();
+                    rows:[
+                        {view: "datatable",
+                        scroll: false,
+                        id: "dtable",
+                        resizeColumn: true,
+                        css: "my-dtable",
+                        on: {
+                            'onItemClick': function (id) {
+                            var item = this.getItem(id);
+                            var stage = item.stages.find(function (element) {return element.name === id.column});
+                            switch (id.column){
+                                case "Downloaded":
+                                    standartLog(stage);
+                                    break;
+                                case "Files attached":
+                                    standartLog(stage);
+                                    break;
+                                case "Integrity validated":
+                                    standartLog(stage);
+                                    if(stage.status === "Error"){
+                                        webix.message("Please, open Capture and fix some problems")
+                                    }
+                                    break;
+                                case "Current advances checked":
+                                    standartLog(stage);
+                                    if(stage.status === "Error"){
+                                        $$("Current Advances").show();
+                                    }
+                                    break;
+                                case "CBC pulled":
+                                    standartLog(stage);
+                                    break;
+                                case "Completed":
+                                    standartLog(stage);
+                                    if(stage.status === "Error"){
+                                        webix.message("Please, try to export the statement again");
+                                    }
+                                    break;
+                            }
+                            }
+                        },
+                        columns: [
+                            {id: "id", header: "id", width: 30},
+                            {id: "opportunityName", header: "Opportunity Name", fillspace: true},
+                            {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){
+                            var Downloaded = obj.stages.find(function(item) {return item.name === "Downloaded"});
+                                if(Downloaded && Downloaded.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Downloaded && Downloaded.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Downloaded && Downloaded.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                        }},
+                            {id: "Files attached", header: "Attached", adjust:"header",template: function(obj){
+                                var Attached = obj.stages.find(function(item) {return item.name === "Files attached"});
+                                if(Attached && Attached.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Attached && Attached.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Attached && Attached.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }},
+                            {id: "Integrity validated", header: "Validated",adjust:"header",template: function(obj){
+                                var Validated = obj.stages.find(function(item) {return item.name === "Integrity validated"});
+                                if(Validated && Validated.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Validated && Validated.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Validated && Validated.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }},
+                            {id: "Current advances checked", header: "Advances",adjust:"header",template: function(obj){
+                                var Advances = obj.stages.find(function(item) {return item.name === "Current advances checked"});
+                                if(Advances && Advances.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Advances && Advances.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Advances && Advances.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }},
+                            {id: "CBC pulled", header: "CBC",adjust:"header",template: function(obj){
+                                var CBC = obj.stages.find(function(item) {return item.name === "CBC pulled"});
+                                if(CBC && CBC.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(CBC && CBC.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(CBC && CBC.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }},
+                            {id: "Submission validated", header: "Submission",adjust:"header",template: function(obj){
+                                var Submission = obj.stages.find(function(item) {return item.name === "Submission validated"});
+                                if(Submission && Submission.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Submission && Submission.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Submission && Submission.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }},
+                            {id: "Completed", header: "Completed",adjust:"header",template: function(obj){
+                                var Completed = obj.stages.find(function(item) {return item.name === "Completed"});
+                                if(Completed && Completed.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
+                                if(Completed && Completed.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
+                                if(Completed && Completed.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+                            }}
+                        ]},
+                        {
+                            id:"Current Advances",
+                            view: "toolbar",
+                            hidden: true,
+                            height: 150,
+                            elements:[
+                                {
+                                    id: "ErrorAdvancesList",
+                                    view: "list",
+                                    on:{
+                                        "onItemClick":function(id){
+                                            var obj = this.getItem(id);
+                                            var stage = obj.stages.find(function(item) {return item.name === "Current advances checked"});
+                                            $$("AdvanceEditor").setValue(stage.errors);
+                                        }
+                                    },
+                                    template:function(obj){
+                                        var stage = obj.stages.find(function(item) {return item.name === "Current advances checked"});
+                                        return stage.errors
+                                    }
+                                },
+                                {rows:[
+                                        {
+                                            id: "AdvanceEditor",
+                                            view: "textarea",
+                                            placeholder: "Write down new MCI"
+                                        },
+                                        {
+                                            id: "MCI button",
+                                            view: "button",
+                                            value: "Assign",
+                                            on:{
+                                                "onItemClick": function () {
+                                                    webix.message("I don't know how to assign new MCI's")
+                                                }
+                                            }
+                                        },
+                                        {
+                                            id: "Hide button",
+                                            view: "button",
+                                            value: "Done",
+                                            on:{
+                                                "onItemClick": function(){
+                                                    $$("Current Advances").hide();
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
                         }
-                        else{$$("CurrentAdvances").show()}
-                    }
+                        ]
                 },
-                columns: [
-                    {id: "rank", header: "", width: 30},
-                    {id: "oppName", header: "Opportunity Name", fillspace:true},
-                    {id: "Downloaded", header: "Downloaded",adjust:"header", template: function(obj){
-                        if(obj.Downloaded === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                        if(obj.Downloaded === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                        if(obj.Downloaded === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                    }},
-                    {id: "Attached", header: "Attached", adjust:"header",template: function(obj){
-                            if(obj.Attached === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.Attached === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.Attached === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                    {id: "Validated", header: "Validated",adjust:"header",template: function(obj){
-                            if(obj.Validated === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.Validated === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.Validated === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                    {id: "Advances", header: "Advances",adjust:"header",template: function(obj){
-                            if(obj.Advances === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.Advances === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.Advances === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                    {id: "CVC", header: "CVC",adjust:"header",template: function(obj){
-                            if(obj.CVC === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.CVC === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.CVC === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                    {id: "Submission", header: "Submission",adjust:"header",template: function(obj){
-                            if(obj.Submission === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.Submission === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.Submission === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }},
-                    {id: "Completed", header: "Completed",adjust:"header",template: function(obj){
-                            if(obj.Completed === "Complete"){ return "<a href=\"#\" class=\"button button-circle button-action\">";}
-                            if(obj.Completed === "Failed"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-                            if(obj.Completed === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
-                        }}
-
-                ],
-                data: [
-                    {
-                        id: 1,
-                        oppName: "The Shawshank Redemption 2323 43434 5335 ",
-                        votes: 678790,
-                        stages: "<input type='button' value='Downloaded' />",
-                        Downloaded: "Complete",
-                        Attached: "Complete",
-                        Validated: "Failed",
-                        Advances: "Complete",
-                        CVC: "Complete",
-                        Submission: "Complete",
-                        Completed: "Complete",
-                        rank: 1
-                    },
-                    {   id: 2,
-                        oppName: "The Shawshank Redemption 2323 43434 5335 ",
-                        votes: 678790,
-                        stages: "<input type='button' value='Downloaded' />",
-                        Downloaded: "Failed",
-                        Attached: "Failed",
-                        Validated: "In Process",
-                        Advances: "Complete",
-                        CVC: "Complete",
-                        Submission: "Failed",
-                        Completed: "Complete",
-                        rank: 2}
-                ]
-            },
-                { view:"resizer" },
+                {view: "resizer"},
                 {
-                    id:"log",view: "text", type: "form", value: "Here is log", width: 350, height: 500
+                    id: "log", view: "textarea", type: "form", value: "Here is log", width: 350, height: 500
                 }
-                ],
+            ],
         },
-        {view: "button", name: "submit", value: "Export Opportunity"}
+        {view: "button", name: "submit", value: "Export Opportunity",
+            on:{
+                "onItemClick":function () {
+                    webix.message("How do we export, again?")
+                }
+            }
+        }
     ];
     webix.ui({
         view: "form",
         id: "my_form",
+        css: "form",
         elements: form1
     });
-</script>
+    webix.ajax().get('data.json', function (t, d) {
+        $$('dtable').parse(d.json().opportunities);
+        $$('ErrorAdvancesList').parse(d.json().opportunities)
+    })
 
+</script>
 </body>
 </html>
