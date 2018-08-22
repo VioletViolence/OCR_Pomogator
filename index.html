@@ -22,7 +22,7 @@
         var Stage = obj.stages.find(function(item) {return item.name === column});
         if(Stage && Stage.status === "Completed"){return "<a href=\"#\" class=\"button button-circle button-action\">";}
         if(Stage && Stage.status === "Error"){ return "<a href=\"#\" class=\"button button-circle button-caution\">";}
-        if(Stage && Stage.status === "In Process"){ return "<a href=\"#\" class=\"button button-circle\">";}
+        if(Stage && Stage.status === "In process"){ return "<a href=\"#\" class=\"button button-circle\">";}
     }
     function standartLog(stage) {
         switch (stage.status) {
@@ -163,7 +163,7 @@
                 },
                 {view: "resizer"},
                 {
-                    id: "log", view: "textarea", type: "form", value: "Here is log", width: 350, height: 500
+                    id: "log", view: "textarea",css:"logSpace", type: "form", value: "Here is log", width: 350, height: 500
                 }
             ],
         },
@@ -177,6 +177,7 @@
     ];
     webix.ui({
         view: "form",
+        margin: 0,
         id: "my_form",
         css: "form",
         elements: form1
