@@ -74,7 +74,9 @@
 
                                             break;
                                         case "Downloaded":
+                                            showLog();
                                             standartLog(stage);
+
                                             break;
                                         case "Files attached":
                                             standartLog(stage);
@@ -176,7 +178,7 @@
                             id: "Current Advances",
                             view: "toolbar",
                             hidden: true,
-                            height: 150,
+                            height: 250,
                             elements: [
                                 {
                                     id: "ErrorAdvancesList",
@@ -248,23 +250,32 @@
                 {
                     id: "log",
                     view: "textarea",
+                    hidden: true,
                     css: "logSpace",
-                    type: "form",
                     value: "Here is log",
-                    width: 350,
-                    height: 500
+                    width: 400
+
                 }
             ],
-        },
-        {
-            view: "button", name: "submit", value: "Export Opportunity",
-            on: {
-                "onItemClick": function () {
-                    webix.message("How do we export, again?")
-                }
-            }
         }
+        // {
+        //     view: "button", name: "submit", value: "Reload",
+        //     on: {
+        //         "onItemClick": function () {
+        //
+        //         }
+        //     }
+        // }
     ];
+
+    function showLog() {
+        if (!$$("log").isVisible()) {
+            $$("log").show()
+        } else $$("log").hide();
+
+    }
+
+
     webix.ui({
         view: "form",
         margin: 0,
@@ -284,7 +295,7 @@
             id:"menu",
             width:200,
             data:[
-                "Export", "Delete", "Export to SF"
+                "Reload", "Delete", "Export to SF"
             ]
         });
 
