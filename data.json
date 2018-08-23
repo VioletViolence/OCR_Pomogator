@@ -4,10 +4,10 @@
     "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
     "stages": [
       {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
-      {"name": "Files attached", "status": "Error", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
-      {"name": "Integrity validated", "status": "Error", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
-      {"name": "Current advances checked", "status": "Error", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
-      {"name": "CBC pulled", "status": "Error", "log": "CBC Error", "errors": []},
+      {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
+      {"name": "Integrity validated", "status": "Completed", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
+      {"name": "Current advances checked", "status": "Completed", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
+      {"name": "CBC pulled", "status": "Completed", "log": "CBC Error", "errors": []},
       {"name": "Submission validated", "status": "Error", "log": "Submission validated", "errors": []},
       {"name": "Completed", "status": "In process", "log": "Completed", "errors": []}
     ]
@@ -18,7 +18,7 @@
       "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
       "stages": [
         {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
-        {"name": "Files attached", "status": "Error", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
+        {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "Integrity validated", "status": "Completed", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
         {"name": "Current advances checked", "status": "Completed", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "CBC pulled", "status": "Error", "log": "CBC pulled", "errors": []},
@@ -32,7 +32,7 @@
       "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
       "stages": [
         {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
-        {"name": "Files attached", "status": "Error", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
+        {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "Integrity validated", "status": "Completed", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
         {"name": "Current advances checked", "status": "Error", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "CBC pulled", "status": "In process", "log": "CBC pulled", "errors": []},
@@ -46,7 +46,7 @@
       "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
       "stages": [
         {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
-        {"name": "Files attached", "status": "Error", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
+        {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "Integrity validated", "status": "Error", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
         {"name": "Current advances checked", "status": "In process", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "CBC pulled", "status": "In process", "log": "CBC pulled", "errors": []},
@@ -60,7 +60,7 @@
       "opportunityName": "Sixth Merchant Business - 4/30/2018 - 2",
       "stages": [
         {"name": "Downloaded", "status": "Completed", "log": "Download completed", "errors": []},
-        {"name": "Files attached", "status": "Error", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
+        {"name": "Files attached", "status": "Completed", "log": "JUL-18.csv, JUN-18.csv", "errors": ["Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "Integrity validated", "status": "In process", "log": ".. log output ..", "errors": ["Exported statements has errors"]},
         {"name": "Current advances checked", "status": "In process", "log": "Current advances checked", "errors": ["Abandon hope ye who enter here","Error 1", "Error 2", "Error 3", "Error 4"]},
         {"name": "CBC pulled", "status": "In process", "log": "CBC pulled", "errors": []},

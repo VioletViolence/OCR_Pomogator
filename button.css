@@ -3,14 +3,14 @@
     background-size: cover!important;
 }
 .logSpace .webix_inp_textarea{
-    border: 0!important;
+    border: 0;
 }
 .logSpace{
     background-color: white;
-    margin-top: 3px!important;
-    margin-left: 3px!important;
-    margin-right: 0px!important;
-    align-self: right!important;
+    /*margin-top: 3px!important;*/
+    /*margin-left: 3px!important;*/
+    /*margin-right: 0px!important;*/
+    /*align-self: right!important;*/
 }
 .button {
     -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.15);
