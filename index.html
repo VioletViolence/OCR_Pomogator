@@ -49,7 +49,9 @@
     }
 
     var form1 = [
-        {type: "header", template: "OCR Helper"},
+        {type: "header", template: function (){
+              return  "<div class='header-container'><div>OCR Helper</div><div> <input type='button' onclick='return showLog(this)' value='Show Log' class='logButton'' /></div></div>"
+            }},
         {
             margin: 5, cols: [
                 {
@@ -74,7 +76,6 @@
 
                                             break;
                                         case "Downloaded":
-                                            showLog();
                                             standartLog(stage);
 
                                             break;
@@ -268,10 +269,14 @@
         // }
     ];
 
-    function showLog() {
-        if (!$$("log").isVisible()) {
-            $$("log").show()
-        } else $$("log").hide();
+    function showLog(element) {
+        if (!$$("log").isVisible() && element.value == "Show Log") {
+            element.value = "Hide Log";
+            $$("log").show();
+        } else {
+            element.value = "Show Log";
+            $$("log").hide();
+        }
 
     }
 
