@@ -8,45 +8,10 @@
     <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
 </head>
 <body>
-<!--<a href="#" class="button button-circle">Silver Circle</a>-->
-<!--<a href="#" class="button button-circle button-primary">Blue Circle</a>-->
-<!--<a href="#" class="button button-circle button-action">Green Circle</a>-->
-<!--<a href="#" class="button button-circle button-highlight">Orange Circle</a>-->
-<!--<a href="#" class="button button-circle button-caution">Red Circle</a>-->
-<!--<a href="#" class="button button-circle button-royal">Purple Circle</a>-->
 
 <div id="container"></div>
 
 <script>
-
-    function buttonCheck(obj, column) {
-        var Stage = obj.stages.find(function (item) {
-            return item.name === column
-        });
-        if (Stage && Stage.status === "Completed") {
-            return "<a href=\"#\" class=\"button button-circle button-action\">";
-        }
-        if (Stage && Stage.status === "Error") {
-            return "<a href=\"#\" class=\"button button-circle button-caution\">";
-        }
-        if (Stage && Stage.status === "In process") {
-            return "<a href=\"#\" class=\"button button-circle\">";
-        }
-    }
-
-    function standartLog(stage) {
-        switch (stage.status) {
-            case "Completed":
-                $$("log").setValue(stage.log);
-                break;
-            case "Error":
-                $$("log").setValue(stage.log + "\n" + "\n" + "\n" + "Errors:\n" + stage.errors);
-                break;
-            case "In Process":
-                $$("log").setValue(stage.log);
-        }
-        $$("Current Advances").hide();
-    }
 
     var form1 = [
         {type: "header", template: function (){
@@ -71,35 +36,34 @@
                                         return element.name === id.column
                                     });
                                     switch (id.column) {
-                                        case "opportunityName":
+                                        case "name":
                                             showContextMenu(node)
 
                                             break;
-                                        case "Downloaded":
-                                            standartLog(stage);
-
+                                        case "DocumentsDownloaded":
+                                            standartLog(stage.stageStatus);
                                             break;
                                         case "Files attached":
-                                            standartLog(stage);
+                                            standartLog(stage.stageStatus);
                                             break;
                                         case "Integrity validated":
-                                            standartLog(stage);
-                                            if (stage.status === "Error") {
+                                            standartLog(stage.stageStatus);
+                                            if (stage.stageStatus.statusStr === "Error") {
                                                 webix.message("Please, open Capture and fix some problems")
                                             }
                                             break;
                                         case "Current advances checked":
-                                            standartLog(stage);
-                                            if (stage.status === "Error") {
+                                            standartLog(stage.stageStatus);
+                                            if (stage.stageStatus.statusStr === "Error") {
                                                 $$("Current Advances").show();
                                             }
                                             break;
                                         case "CBC pulled":
-                                            standartLog(stage);
+                                            standartLog(stage.stageStatus);
                                             break;
                                         case "Completed":
-                                            standartLog(stage);
-                                            if (stage.status === "Error") {
+                                            standartLog(stage.stageStatus);
+                                            if (stage.stageStatus.statusStr === "Error") {
                                                 webix.message("Please, try to export the statement again");
                                             }
                                             break;
@@ -108,10 +72,10 @@
                             },
                             columns: [
                                 {id: "id", header: "id", width: 30},
+                                {id: "name", header: "Opportunity Name", fillspace: true},
+
                                 {
-                                    id: "opportunityName", header: "Opportunity Name", fillspace: true},
-                                {
-                                    id: "Downloaded",
+                                    id: "DocumentsDownloaded",
                                     header: "Downloaded",
                                     css: {'text-align': 'center'},
                                     adjust: "header",
@@ -288,9 +252,10 @@
         css: "form",
         elements: form1
     });
-    webix.ajax().get('data.json', function (t, d) {
-        $$('dtable').parse(d.json().opportunities);
-        $$('ErrorAdvancesList').parse(d.json().opportunities)
+    webix.ajax().get('http://localhost:8080/status', function (t, d) {
+      //  console.log(d.json());
+        $$('dtable').parse(d.json().oppos);
+        $$('ErrorAdvancesList').parse(d.json().oppos)
     })
 
 
@@ -311,7 +276,37 @@
         $$("dtable").$view.oncontextmenu = function(){return false};
     }
 
+    function buttonCheck(obj, column) {
+        var stage = obj.stages.find(function (item) {
+            return item.name === column
+        });
+        // console.log(column, stage && stage.stageStatus, obj.stages)
+        stage = stage && stage.stageStatus;
+        if (stage && stage.statusStr === "CompletedStStatus") {
+            return "<a href=\"#\" class=\"button button-circle button-action\">";
+        }
+        if (stage && stage.statusStr === "ErrorStStatus") {
+            return "<a href=\"#\" class=\"button button-circle button-caution\">";
+        }
+        if (stage && stage.statusStr === "InProcessStStatus") {
+            return "<a href=\"#\" class=\"button button-circle\">";
+        }
+        return ''
+    }
 
+    function standartLog(stage) {
+        switch (stage.statusStr) {
+            case "CompletedStStatus":
+                $$("log").setValue(stage.log);
+                break;
+            case "Error":
+                $$("log").setValue(stage.log + "\n" + "\n" + "\n" + "Errors:\n" + stage.errors);
+                break;
+            case "In Process":
+                $$("log").setValue(stage.log);
+        }
+        $$("Current Advances").hide();
+    }
 
 
 
