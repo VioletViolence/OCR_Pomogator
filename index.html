@@ -15,7 +15,7 @@
 
     var form1 = [
         {type: "header", template: function (){
-              return  "<div class='header-container'><div>OCR Helper</div><div> <input type='button' onclick='return showLog(this)' value='Show Log' class='logButton'' /></div></div>"
+              return  "<div class='header-container'><div>OCR Helper</div><div> <input type='button' id='logButton' onclick='showLog()' value='Show Log' class='logButton'' /></div></div>"
             }},
         {
             margin: 5, cols: [
@@ -42,6 +42,7 @@
                                             break;
                                         case "DocumentsDownloaded":
                                             standartLog(stage.stageStatus);
+                                            showLog()
                                             break;
                                         case "Files attached":
                                             standartLog(stage.stageStatus);
@@ -233,17 +234,17 @@
         // }
     ];
 
-    function showLog(element) {
-        if (!$$("log").isVisible() && element.value == "Show Log") {
-            element.value = "Hide Log";
+    function showLog() {
+        var logButton = document.getElementById("logButton");
+        if (!$$("log").isVisible()) {
+            logButton.value = "Hide Log";
             $$("log").show();
         } else {
-            element.value = "Show Log";
+            logButton.value = "Show Log";
             $$("log").hide();
         }
 
     }
-
 
     webix.ui({
         view: "form",
