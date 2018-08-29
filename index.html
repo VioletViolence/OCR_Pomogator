@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
     <link rel="stylesheet" href="button.css" type="text/css">
     <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+    <script src="a.js" type="text/javascript"></script>
+    <script src="b.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -225,7 +227,7 @@
                                                     value: "Remove Block",
                                                     on: {
                                                         "onItemClick": function () {
-                                                            deleteBlock(blockNumber)
+                                                            removeBlock(blockNumber)
                                                         }
                                                     }
                                                 }
@@ -387,11 +389,6 @@
 
             $$('advTable').parse(d.json().blocks[elem]);
         })
-    }
-
-    function deleteBlock(elem) {
-
-
     }
 
     function showContextMenu(node) {
