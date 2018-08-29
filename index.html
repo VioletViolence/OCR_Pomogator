@@ -167,18 +167,9 @@
                                     on: {
                                         'onItemClick': function (id, e, node) {
 
-                                            // var obj = this.getItem(id);
-                                            //
-                                            // var descr = obj.find(function)
-                                            //
-                                            // // var stage = item.stages.find(function (element) {
-                                            // //     webix.message(element.name)
-                                            // //     return element.name === id.column
-                                            // // })
+                                             var obj = this.getItem(id);
 
-                                            if (id.column === "descr") {
-                                                webix.message(id.column.value)
-                                            }
+                                            $$("AdvanceEditor").setValue(obj.descr)
                                         }}
                                 },
                                 {
