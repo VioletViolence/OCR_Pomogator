@@ -13,24 +13,27 @@
 
 <script>
 
+    var blockNumber = 0;
+
     var form1 = [
-        {type: "header", template: function (){
-              return  "<div class='header-container'><div>OCR Helper</div><div> <input type='button' id='logButton' onclick='showLog()' value='Show Log' class='logButton'' /></div></div>"
-            }},
+        {
+            type: "header", template: function () {
+                return "<div class='header-container'><div>OCR Helper</div><div> <input type='button' id='logButton' onclick='showLog()' value='Show Log' class='logButton'' /></div></div>"
+            }
+        },
         {
             margin: 5, cols: [
                 {
                     rows: [
                         {
                             view: "datatable",
-                            scroll: false,
+                            scrollY: true,
                             id: "dtable",
                             resizeColumn: true,
                             css: "my-dtable",
                             on: {
                                 'onItemClick': function (id, e, node) {
                                     var item = this.getItem(id);
-
 
                                     var stage = item.stages.find(function (element) {
                                         return element.name === id.column
@@ -42,7 +45,7 @@
                                             break;
                                         case "DocumentsDownloaded":
                                             standartLog(stage.stageStatus);
-                                            showLog()
+                                            $$("log").show();
                                             break;
                                         case "Files attached":
                                             standartLog(stage.stageStatus);
@@ -53,11 +56,12 @@
                                                 webix.message("Please, open Capture and fix some problems")
                                             }
                                             break;
-                                        case "Current advances checked":
+                                        case "AdvancesChecked":
                                             standartLog(stage.stageStatus);
-                                            if (stage.stageStatus.statusStr === "Error") {
-                                                $$("Current Advances").show();
-                                            }
+                                            $$("advances").show();
+                                            // if (stage.stageStatus.statusStr === "Error") {
+                                            //     $$("Current Advances").show();
+                                            // }
                                             break;
                                         case "CBC pulled":
                                             standartLog(stage.stageStatus);
@@ -103,7 +107,7 @@
                                     }
                                 },
                                 {
-                                    id: "Current advances checked",
+                                    id: "AdvancesChecked",
                                     header: "Advances",
                                     css: {'text-align': 'center'},
                                     adjust: "header",
@@ -140,74 +144,188 @@
                                 }
                             ]
                         },
+                        {view: "resizer"},
                         {
-                            id: "Current Advances",
+                            id: "advances",
                             view: "toolbar",
                             hidden: true,
                             height: 250,
                             elements: [
                                 {
-                                    id: "ErrorAdvancesList",
-                                    view: "list",
+                                    view: "datatable",
+                                    scroll: true,
+                                    id: "advTable",
+                                    resizeColumn: true,
+                                    columns: [
+                                        {id: "date", header: "Date"},
+                                        {id: "descr", header: "Description", fillspace: true},
+                                        {id: "amount", header: "Amount"},
+                                        {id: "tags", header: "Tags"}
+                                    ],
                                     on: {
-                                        "onItemClick": function (id) {
-                                            var obj = this.getItem(id);
-                                            var stage = obj.stages.find(function (item) {
-                                                return item.name === "Current advances checked"
-                                            });
-                                            $$("AdvanceEditor").setValue(stage.errors);
-                                        }
-                                    },
-                                    template: function (obj) {
-                                        var stage = obj.stages.find(function (item) {
-                                            return item.name === "Current advances checked"
-                                        });
-                                        return stage.errors
-                                    }
+                                        'onItemClick': function (id, e, node) {
+
+                                            // var obj = this.getItem(id);
+                                            //
+                                            // var descr = obj.find(function)
+                                            //
+                                            // // var stage = item.stages.find(function (element) {
+                                            // //     webix.message(element.name)
+                                            // //     return element.name === id.column
+                                            // // })
+
+                                            if (id.column === "descr") {
+                                                webix.message(id.column.value)
+                                            }
+                                        }}
                                 },
                                 {
+                                    width: 400,
                                     rows: [
                                         {
                                             cols: [
                                                 {
-                                                    id: "AdvanceEditor",
-                                                    view: "textarea",
-                                                    placeholder: "Write down new MCI"
+                                                    id: "next-block",
+                                                    view: "button",
+                                                    value: "Next Block",
+                                                    on: {
+                                                        "onItemClick": function () {
+                                                            getAdvancesData(blockNumber + 1)
+                                                            blockNumber += 1
+                                                        }
+                                                    }
                                                 },
                                                 {
-                                                    id: "dropDown",
-                                                    view: "select",
-                                                    options: [
-                                                        "Placeholder #1",
-                                                        "Placeholder #2",
-                                                        "Placeholder #3"
-                                                    ],
-                                                    width: 120
+                                                    id: "ignore-block",
+                                                    view: "button",
+                                                    value: "Ignore Block",
+                                                    on: {
+                                                        "onItemClick": function () {
+                                                        }
+                                                    }
                                                 }
                                             ]
                                         },
                                         {
-                                            id: "MCI button",
-                                            view: "button",
-                                            value: "Assign",
-                                            on: {
-                                                "onItemClick": function () {
-                                                    webix.message("I don't know how to assign new MCI's")
+                                            cols: [
+                                                {
+                                                    id: "prev-block",
+                                                    view: "button",
+                                                    value: "Previous Block",
+                                                    on: {
+                                                        "onItemClick": function () {
+                                                            getAdvancesData(blockNumber - 1)
+                                                            blockNumber -= 1
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    id: "remove-block",
+                                                    view: "button",
+                                                    value: "Remove Block",
+                                                    on: {
+                                                        "onItemClick": function () {
+                                                            deleteBlock(blockNumber)
+                                                        }
+                                                    }
                                                 }
-                                            }
+                                            ]
                                         },
                                         {
-                                            id: "Hide button",
+                                            id: "AdvanceEditor",
+                                            view: "textarea",
+                                            placeholder: "Write down new MCI"
+                                        },
+                                                        {
+                                                            id: "dropDown",
+                                                            view: "select",
+                                                            options: [
+                                                                "Placeholder #1",
+                                                                "Placeholder #2",
+                                                                "Placeholder #1",
+                                                                "Placeholder #2",
+                                                                "Placeholder #1",
+                                                                "Placeholder #2",
+                                                                "Placeholder #1",
+                                                                "Placeholder #2",
+                                                                "Placeholder #1",
+                                                                "Placeholder #2",
+                                                                "Placeholder #3"
+                                                            ]
+                                                        },
+                                        {
+                                            id: "fixed-block",
                                             view: "button",
-                                            value: "Done",
+                                            value: "Mark As Fixed Block",
                                             on: {
                                                 "onItemClick": function () {
-                                                    $$("Current Advances").hide();
                                                 }
                                             }
                                         }
                                     ]
                                 }
+                                // {
+                                //     id: "ErrorAdvancesList",
+                                //     view: "list",
+                                //     on: {
+                                //         "onItemClick": function (id) {
+                                //             var obj = this.getItem(id);
+                                //             var stage = obj.stages.find(function (item) {
+                                //                 return item.name === "Current advances checked"
+                                //             });
+                                //             $$("AdvanceEditor").setValue(stage.errors);
+                                //         }
+                                //     },
+                                //     template: function (obj) {
+                                //         var stage = obj.stages.find(function (item) {
+                                //             return item.name === "Current advances checked"
+                                //         });
+                                //         return stage.errors
+                                //     }
+                                // },
+                                // {
+                                //     rows: [
+                                //         {
+                                //             cols: [
+                                //                 {
+                                //                     id: "AdvanceEditor",
+                                //                     view: "textarea",
+                                //                     placeholder: "Write down new MCI"
+                                //                 },
+                                //                 {
+                                //                     id: "dropDown",
+                                //                     view: "select",
+                                //                     options: [
+                                //                         "Placeholder #1",
+                                //                         "Placeholder #2",
+                                //                         "Placeholder #3"
+                                //                     ],
+                                //                     width: 120
+                                //                 }
+                                //             ]
+                                //         },
+                                //         {
+                                //             id: "MCI button",
+                                //             view: "button",
+                                //             value: "Assign",
+                                //             on: {
+                                //                 "onItemClick": function () {
+                                //                     webix.message("I don't know how to assign new MCI's")
+                                //                 }
+                                //             }
+                                //         },
+                                //         {
+                                //             id: "Hide button",
+                                //             view: "button",
+                                //             value: "Done",
+                                //             on: {
+                                //                 "onItemClick": function () {
+                                //                     $$("Current Advances").hide();
+                                //                 }
+                                //             }
+                                //         }
+                                //     ]
+                                // }
                             ]
                         }
                     ]
@@ -219,7 +337,7 @@
                     hidden: true,
                     css: "logSpace",
                     value: "Here is log",
-                    width: 400
+                    width: 300
 
                 }
             ],
@@ -253,29 +371,68 @@
         css: "form",
         elements: form1
     });
-    webix.ajax().get('http://localhost:8080/status', function (t, d) {
-      //  console.log(d.json());
+    webix.ajax().get('data.json', function (t, d) {
+        //  console.log(d.json());
         $$('dtable').parse(d.json().oppos);
-        $$('ErrorAdvancesList').parse(d.json().oppos)
+        //  $$('ErrorAdvancesList').parse(d.json().oppos)
     })
 
+    webix.ajax().get('adv.json', function (t, d) {
+      $$('advTable').parse(d.json().blocks[blockNumber]);
+    })
 
-    function showContextMenu (node) {
+    function getAdvancesData (elem) {
+        $$('advTable').clearAll();
+        webix.ajax().get('adv.json', function (t, d) {
+
+            $$('advTable').parse(d.json().blocks[elem]);
+        })
+    }
+
+    function deleteBlock(elem) {
+
+
+    }
+
+    function showContextMenu(node) {
         webix.ui({
-            view:"contextmenu",
-            id:"menu",
-            width:200,
-            data:[
+            view: "contextmenu",
+            id: "menu",
+            width: 200,
+            data: [
                 "Reload", "Delete", "Export to SF"
             ]
         });
 
-        $$("menu").show(node, {pos:"right"});
+        $$("menu").show(node, {pos: "right"});
 
 
-
-        $$("dtable").$view.oncontextmenu = function(){return false};
+        $$("dtable").$view.oncontextmenu = function () {
+            return false
+        };
     }
+
+    function showAdvTableContextMenu(target) {
+        webix.ui({
+            view: "contextmenu",
+            id: "advTableMenu",
+            width: 200,
+            data: [
+                "Next Block", "Previous Block", "Ignore Block", "Delete Block", "Mark As Fixed"
+            ]
+        });
+
+        $$("advTableMenu").show(target, {pos: "right"});
+
+
+        $$("advTable").$view.oncontextmenu = function () {
+            return false
+        };
+    }
+
+    $$("advTable").attachEvent("onHeaderClick", function (id, e, target) {
+        showAdvTableContextMenu(target)
+    });
 
     function buttonCheck(obj, column) {
         var stage = obj.stages.find(function (item) {
@@ -306,10 +463,8 @@
             case "In Process":
                 $$("log").setValue(stage.log);
         }
-        $$("Current Advances").hide();
+        //$$("Current Advances").hide();
     }
-
-
 
 
 </script>
