@@ -20,7 +20,7 @@
     var form1 = [
         {
             type: "header", template: function () {
-                return "<div class='header-container'><div>OCR Helper</div><div> <input type='button' id='logButton' onclick='showLog()' value='Show Log' class='logButton'' /></div></div>"
+                return "<div class='header-container'><div>OCR Helper</div><div> <input type='button' id='logButton' onclick='showHideLog()' value='Show Log' class='logButton'' /></div></div>"
             }
         },
         {
@@ -47,7 +47,7 @@
                                             break;
                                         case "DocumentsDownloaded":
                                             standartLog(stage.stageStatus);
-                                            $$("log").show();
+                                            showLog()
                                             break;
                                         case "Files attached":
                                             standartLog(stage.stageStatus);
@@ -60,7 +60,8 @@
                                             break;
                                         case "AdvancesChecked":
                                             standartLog(stage.stageStatus);
-                                            $$("advances").show();
+                                            showAdvancesPopup()
+                                         //   $$("advances").show();
                                             // if (stage.stageStatus.statusStr === "Error") {
                                             //     $$("Current Advances").show();
                                             // }
@@ -162,7 +163,7 @@
                                         {id: "date", header: "Date"},
                                         {id: "descr", header: "Description", fillspace: true},
                                         {id: "amount", header: "Amount"},
-                                        {id: "tags", header: "Tags"}
+                                        {id: "tags", header: "Tags", width: 180}
                                     ],
                                     on: {
                                         'onItemClick': function (id, e, node) {
@@ -345,7 +346,7 @@
         // }
     ];
 
-    function showLog() {
+    function showHideLog() {
         var logButton = document.getElementById("logButton");
         if (!$$("log").isVisible()) {
             logButton.value = "Hide Log";
@@ -354,7 +355,14 @@
             logButton.value = "Show Log";
             $$("log").hide();
         }
+    }
 
+    function showLog() {
+        var logButton = document.getElementById("logButton");
+        if (!$$("log").isVisible()) {
+            logButton.value = "Hide Log";
+            $$("log").show();
+        }
     }
 
     webix.ui({
@@ -364,23 +372,14 @@
         css: "form",
         elements: form1
     });
-    webix.ajax().get('data.json', function (t, d) {
+    webix.ajax().get('localhost:8080/status', function (t, d) {
         //  console.log(d.json());
-        $$('dtable').parse(d.json().oppos);
+        var result = d.json()
+        $$('dtable').parse(result.oppos);
         //  $$('ErrorAdvancesList').parse(d.json().oppos)
     })
 
-    webix.ajax().get('adv.json', function (t, d) {
-      $$('advTable').parse(d.json().blocks[blockNumber]);
-    })
 
-    function getAdvancesData (elem) {
-        $$('advTable').clearAll();
-        webix.ajax().get('adv.json', function (t, d) {
-
-            $$('advTable').parse(d.json().blocks[elem]);
-        })
-    }
 
     function showContextMenu(node) {
         webix.ui({
@@ -438,6 +437,215 @@
             return "<a href=\"#\" class=\"button button-circle\">";
         }
         return ''
+    }
+
+    function showAdvancesPopup() {
+
+
+        webix.ajax().get('adv.json', function (t, d) {
+            $$('advTable').parse(d.json().blocks[blockNumber]);
+        })
+
+        function getAdvancesData (elem) {
+            $$('advTable').clearAll();
+            webix.ajax().get('adv.json', function (t, d) {
+
+                $$('advTable').parse(d.json().blocks[elem]);
+            })
+        }
+
+        webix.ui({
+            view:"popup",
+            position: "center",
+            id:"advancespopup",
+            body:{
+                id: "advances",
+                view: "toolbar",
+                hidden: true,
+                height: 250,
+                elements: [
+                    {
+                        view: "datatable",
+                        scroll: true,
+                        width: 800,
+                        id: "advTable",
+                        resizeColumn: true,
+                        columns: [
+                            {id: "date", header: "Date"},
+                            {id: "descr", header: "Description", fillspace: true},
+                            {id: "amount", header: "Amount"},
+                            {id: "tags", header: "Tags", width: 180}
+                        ],
+                        on: {
+                            'onItemClick': function (id, e, node) {
+
+                                var obj = this.getItem(id);
+
+                                $$("AdvanceEditor").setValue(obj.descr)
+                            }}
+                    },
+                    {
+                        width: 400,
+                        rows: [
+                            {
+                                cols: [
+                                    {
+                                        id: "next-block",
+                                        view: "button",
+                                        value: "Next Block",
+                                        on: {
+                                            "onItemClick": function () {
+                                                getAdvancesData(blockNumber + 1)
+                                                blockNumber += 1
+                                            }
+                                        }
+                                    },
+                                    {
+                                        id: "ignore-block",
+                                        view: "button",
+                                        value: "Ignore Block",
+                                        on: {
+                                            "onItemClick": function () {
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                cols: [
+                                    {
+                                        id: "prev-block",
+                                        view: "button",
+                                        value: "Previous Block",
+                                        on: {
+                                            "onItemClick": function () {
+                                                getAdvancesData(blockNumber - 1)
+                                                blockNumber -= 1
+                                            }
+                                        }
+                                    },
+                                    {
+                                        id: "remove-block",
+                                        view: "button",
+                                        value: "Remove Block",
+                                        on: {
+                                            "onItemClick": function () {
+                                                removeBlock(blockNumber)
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                id: "AdvanceEditor",
+                                view: "textarea",
+                                placeholder: "Write down new MCI"
+                            },
+                            {
+                                id: "dropDown",
+                                view: "select",
+                                options: [
+                                    "Placeholder #1",
+                                    "Placeholder #2",
+                                    "Placeholder #1",
+                                    "Placeholder #2",
+                                    "Placeholder #1",
+                                    "Placeholder #2",
+                                    "Placeholder #1",
+                                    "Placeholder #2",
+                                    "Placeholder #1",
+                                    "Placeholder #2",
+                                    "Placeholder #3"
+                                ]
+                            },
+                            {
+                                id: "fixed-block",
+                                view: "button",
+                                value: "Mark As Fixed Block",
+                                on: {
+                                    "onItemClick": function () {
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                    // {
+                    //     id: "ErrorAdvancesList",
+                    //     view: "list",
+                    //     on: {
+                    //         "onItemClick": function (id) {
+                    //             var obj = this.getItem(id);
+                    //             var stage = obj.stages.find(function (item) {
+                    //                 return item.name === "Current advances checked"
+                    //             });
+                    //             $$("AdvanceEditor").setValue(stage.errors);
+                    //         }
+                    //     },
+                    //     template: function (obj) {
+                    //         var stage = obj.stages.find(function (item) {
+                    //             return item.name === "Current advances checked"
+                    //         });
+                    //         return stage.errors
+                    //     }
+                    // },
+                    // {
+                    //     rows: [
+                    //         {
+                    //             cols: [
+                    //                 {
+                    //                     id: "AdvanceEditor",
+                    //                     view: "textarea",
+                    //                     placeholder: "Write down new MCI"
+                    //                 },
+                    //                 {
+                    //                     id: "dropDown",
+                    //                     view: "select",
+                    //                     options: [
+                    //                         "Placeholder #1",
+                    //                         "Placeholder #2",
+                    //                         "Placeholder #3"
+                    //                     ],
+                    //                     width: 120
+                    //                 }
+                    //             ]
+                    //         },
+                    //         {
+                    //             id: "MCI button",
+                    //             view: "button",
+                    //             value: "Assign",
+                    //             on: {
+                    //                 "onItemClick": function () {
+                    //                     webix.message("I don't know how to assign new MCI's")
+                    //                 }
+                    //             }
+                    //         },
+                    //         {
+                    //             id: "Hide button",
+                    //             view: "button",
+                    //             value: "Done",
+                    //             on: {
+                    //                 "onItemClick": function () {
+                    //                     $$("Current Advances").hide();
+                    //                 }
+                    //             }
+                    //         }
+                    //     ]
+                    // }
+                ]
+            }
+        }).show();
+    }
+
+    webix.ajax().get('adv.json', function (t, d) {
+        $$('advTable').parse(d.json().blocks[blockNumber]);
+    })
+
+    function getAdvancesData (elem) {
+        $$('advTable').clearAll();
+        webix.ajax().get('adv.json', function (t, d) {
+
+            $$('advTable').parse(d.json().blocks[elem]);
+        })
     }
 
     function standartLog(stage) {
