@@ -36,7 +36,7 @@
                             on: {
                                 'onItemClick': function (id, e, node) {
                                     var item = this.getItem(id);
-
+                                    webix.message(id.column)
                                     var stage = item.stages.find(function (element) {
                                         return element.name === id.column
                                     });
@@ -49,7 +49,7 @@
                                             standartLog(stage.stageStatus);
                                             showLog()
                                             break;
-                                        case "Files attached":
+                                        case "FilesAttached":
                                             standartLog(stage.stageStatus);
                                             break;
                                         case "Integrity validated":
@@ -92,7 +92,7 @@
                                     }
                                 },
                                 {
-                                    id: "Files attached",
+                                    id: "FilesAttached",
                                     header: "Attached",
                                     css: {'text-align': 'center'},
                                     adjust: "header",
