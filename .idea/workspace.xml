@@ -1,35 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a32ffb83-46c9-448e-8282-414dd17ca1c3" name="Default Changelist" comment="apollo added">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/deal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/funder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schema/schema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/apollo.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/src/components/ApolloExample.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/static/src/vue-apollo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NewInterface.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/button.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallpaper.jpg" beforeDir="false" />
+    <list default="true" id="a32ffb83-46c9-448e-8282-414dd17ca1c3" name="Default Changelist" comment="initial commit">
+      <change afterPath="$PROJECT_DIR$/web/static/src/components/.graphqlconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/static/src/components/ApolloExample.vue" beforeDir="false" afterPath="$PROJECT_DIR$/web/static/src/components/ApolloExample.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +12,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -102,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617021638035</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="initial commit">
+      <created>1617025326485</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1617025326485</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +112,7 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="Revert &quot;first commit&quot;&#10;&#10;This reverts commit 515ed584" />
     <MESSAGE value="apollo added" />
-    <option name="LAST_COMMIT_MESSAGE" value="apollo added" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
 </project>

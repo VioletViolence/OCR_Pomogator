@@ -8,7 +8,7 @@ export const GET_DEALS = gql`
     userName
     stage
     }
- }`;
+ }`
 
 
 export default {
@@ -19,12 +19,6 @@ export default {
   },
 
   apollo: {
-    // deals: gql`query {
-    //   deals {
-    //      userName
-    //       stage
-    //  }
-    // }`
 
     deals: {
       query: GET_DEALS,
